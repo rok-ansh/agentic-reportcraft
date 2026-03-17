@@ -29,6 +29,7 @@ class Analyst(BaseModel):
             f"Description: {self.description}\n"
         )
 
+# This class will contain a list of analysts 
 class Perspective(BaseModel):
     analysts: List[Analyst] = Field(description = "Comprensive list of analysts with their roles, affiliations. ")
 
@@ -42,12 +43,14 @@ class SearchQuery(BaseModel):
 #--------------------------------------
 # State Classes for Graph
 #--------------------------------------
+# This is for 1st Workflow
 class GenerateAnalystsState(TypedDict):
     topic: str # Number of analysts to generate
     max_analysts: int # Number of analysts to generate
     human_analyst_feedback: str # Feedback from human 
     analysts: List[Analyst] # List of analysts generated
 
+# This is for 2nd Workflow
 class InterviewState(MessagesState):
     max_num_turns: int # Maximum interview turns allowed
     context: Annotated[str, operator.add] # Retrieved or searched context
@@ -55,6 +58,7 @@ class InterviewState(MessagesState):
     interview: str # Full interview transcript
     sections: list # Generated section from interview
 
+# This is for 3rd Workflow
 class ResearchGraphState(TypedDict):
     topic: str # Research topic
     max_analysts: int # Number of analysts 
